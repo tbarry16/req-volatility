@@ -55,7 +55,7 @@ app.post('api/google-login', async (req, res) => {
 
 //Will need to change/inspect the routes below this
 app.use('/api', apiRouter, (req, res) => {
-    return res.status(200).send('Connected!')
+    return res.status(200).json(res.locals)
 })
 
 /* Invalid End Point Error Handler */
