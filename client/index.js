@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Main from "../public/main";
-import "./styles.scss"; 
-const container = document.getElementById('app');
+import './styles.scss';
+import App from './app.js'
+
+const container = document.getElementById('root');
 const root = createRoot(container);
-// import "typeface-cormorant";
-
-
+// import 'typeface-cormorant';
 
 root.render(<App/>);
