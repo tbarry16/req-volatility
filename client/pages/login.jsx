@@ -1,46 +1,45 @@
-// import React, { Component } from "react";
-// import "../styles.scss";
-// // import CustomInput from "./components/CustomInput";
-// // import Button from "./components/Button";
+import GoogleLogin from 'react-google-login';
+import { useContext } from 'react';
+import UserContext from '../app.js'
 
-// export default class App extends Component {
-//   state = {
-//     email: "",
-//     password: ""
-//   };
+function Login() {
+  const user = useContext(UserContext).user;
+  const setUser = useContext(UserContext).setUser;
 
-//   handleChange = e => {
-//     this.setState({ [e.currentTarget.id]: e.currentTarget.value });
-//   };
+  const handleLogin = async (googleData) => {
+    const res = await fetch('/api/google-login', {
+      method: 'POST',
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
 
-//   render() {
-//     return (
-//       <div className="App">
-//         <form className="form">
-//           <CustomInput
-//             labelText="Email"
-//             id="email"
-//             formControlProps={{
-//               fullWidth: true
-//             }}
-//             handleChange={this.handleChange}
-//             type="text"
-//           />
-//           <CustomInput
-//             labelText="Password"
-//             id="password"
-//             formControlProps={{
-//               fullWidth: true
-//             }}
-//             handleChange={this.handleChange}
-//             type="password"
-//           />
+    const userData = await res.json();
+    setUser(userData);
+  }
 
-//           <Button type="button" color="primary" className="form__custom-button">
-//             Log in
-//           </Button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
+  const handleFailure = (error) => {
+    alert(error);
+  }
+
+  return (
+    <div className='Login'>
+      <header className='LoginHeader'>
+        <div>
+          <GoogleLogin
+            clientId={process.env.VOLATRACK_GOOGLE_CLIENT_ID}
+            buttonText="Log in with Google"
+            onSuccess={handleLogin}
+            onFailure={handleFailure}
+            cookiePolicy={'single_host_origin'}
+          ></GoogleLogin>
+        </div>
+      </header>
+    </div>
+  )
+}
+
+export default Login;
