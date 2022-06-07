@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
-import Login from '../client/pages/login.jsx';
+import Login from './pages/login.jsx';
 
 
-const Main = () => {
+const App = () => {
 
   return(
     <BrowserRouter>
@@ -15,4 +15,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default App;
