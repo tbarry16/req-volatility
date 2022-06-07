@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const cookieParser = require('cookie-parser')
+require('dotenv').config()
 
 // ROUTES
 const apiRouter = require('./routes/apiRouter')
@@ -23,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/api', apiRouter, (req, res) => {
-    return res.status(200).send('Connected!')
+    return res.status(200).json(res.locals)
 })
 
 /* Invalid End Point Error Handler */
