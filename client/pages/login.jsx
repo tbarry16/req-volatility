@@ -1,29 +1,32 @@
 import GoogleLogin from 'react-google-login';
-import React, { useContext } from 'react';
-import UserContext from '../app.js'
+import React from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../app.js'
 
 function Login() {
-  const user = useContext(UserContext).user
-  const setUser = useContext(UserContext).setUser;
+  const { user, setUser } = useContext(UserContext);
 
-  // const handleLogin = async (googleData) => {
-  //   const res = await fetch('/api/google-login', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       token: googleData.tokenId,
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //   });
+  const handleLogin = async (googleData) => {
+    const res = await fetch('/api/google-login', {
+      method: 'POST',
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
 
-  //   const userData = await res.json();
-  //   setUser(userData);
-  // }
+    const userData = await res.json();
+    setUser(userData);
+    console.log(userData)
+    // console.log(googleData)
+  }
 
-  // const handleFailure = (error) => {
-  //   alert(error);
-  // }
+  const handleFailure = (error) => {
+    console.log(error);
+    // error.details ? alert(error.details) : alert(error);
+  }
 
   return (
     <div className='Login'>
