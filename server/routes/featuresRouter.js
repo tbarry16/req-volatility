@@ -18,9 +18,12 @@ router.get('/:email/:feature', featuresController.subscribeUserToFeature, (req, 
 })
 
 router.post('/', featuresController.createNewFeature, requirementsController.addRequirementsToFeature, (req, res, next) => {
-    return next();
+    return res.status(200).send('Feature created successfully!')
 })
 
+router.put('/', requirementsController.updateRequirements, requirementsController.addRequirementsToFeature, (req, res, next) => {
+    return res.status(200).send('Feature updated successfully!')
+})
 
 
 
