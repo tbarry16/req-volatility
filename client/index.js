@@ -7,4 +7,4 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 // import 'typeface-cormorant';
 
-root.render(<App/>);
+root.render(<App />);

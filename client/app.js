@@ -6,18 +6,15 @@ const UserContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState(undefined);
-  const userObj = {
-    user: user,
-    setUser: setUser
-  }
 
   return(
-    <UserContext.Provider value={userObj}>
+    <UserContext.Provider value={ {user, setUser} }>
       <BrowserRouter>
-        <Routes>
+      <Login />
+        {/* <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/Login' element={<Login />} />
-        </Routes>
+        </Routes> */}
       </BrowserRouter>
     </UserContext.Provider>
   );
