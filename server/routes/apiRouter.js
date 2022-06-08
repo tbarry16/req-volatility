@@ -4,13 +4,8 @@ const router = express.Router();
 const featuresRouter = require('./featuresRouter')
 const db = require('../db')
 const { OAuth2Client } = require('google-auth-library');
-
-// HELPER FUNCTIONS
-// function upsert(array, item) {
-//     const i = array.findIndex((_item) => _item.email === item.email);
-//     if (i > -1) array[i] = item;
-//     else array.push(item);
-//   }
+const dotenv = require('dotenv')
+dotenv.config()
 
 
 router.use('/features', featuresRouter, (req, res, next) => {
