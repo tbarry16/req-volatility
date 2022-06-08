@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 
 //value inside .env will be accessed in server.js
 dotenv.config();
-// const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.VOLATRACK_GOOGLE_CLIENT_ID);
 
 // ROUTES
 const apiRouter = require('./routes/apiRouter')
