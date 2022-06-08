@@ -11,9 +11,11 @@ const App = () => {
     setUser: setUser
   }
 
-  return(
+  return (
+    // <Login/>
     <UserContext.Provider value={userObj}>
       <BrowserRouter>
+      <Login />
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/Login' element={<Login />} />
