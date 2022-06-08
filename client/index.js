@@ -5,6 +5,5 @@ import App from './app.js'
 
 const container = document.getElementById('root');
 const root = createRoot(container);
-// import 'typeface-cormorant';
 
 root.render(<App />);

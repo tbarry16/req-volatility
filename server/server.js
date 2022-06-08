@@ -2,7 +2,7 @@
 
 const express = require('express');
 const dotenv = require('dotenv');
-const { OAuth2Client } = require('google-auth-library');
+
 const app = express();
 const path = require('path');
 const PORT = 3000;
@@ -29,33 +29,33 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //From here to post req to api/google-login is for OAuth. Can rearrange this later
-const users = [];
+// const users = [];
 
-function upsert(array, item) {
-  const i = array.findIndex((_item) => _item.email === item.email);
-  if (i > -1) array[i] = item;
-  else array.push(item);
-}
+// function upsert(array, item) {
+//   const i = array.findIndex((_item) => _item.email === item.email);
+//   if (i > -1) array[i] = item;
+//   else array.push(item);
+// }
 
-app.post('api/google-login', async (req, res) => {
-  //should include email as part of req.body if we want to store this in database
-  const { token } = req.body;
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.CLIENT_ID,
-  });
-  const { name, email, picture } = ticket.getPayload();
-  upsert(users, { name, email, picture });
-  res.status(201);
-  res.json({ name, email, picture });
-});
+// app.post('/api/google-login', async (req, res) => {
+//   //should include email as part of req.body if we want to store this in database
+//   const { token } = req.body;
+//   const ticket = await client.verifyIdToken({
+//     idToken: token,
+//     audience: process.env.CLIENT_ID,
+//   });
+//   const { name, email, picture } = ticket.getPayload();
+//   upsert(users, { name, email, picture });
+//   res.status(201);
+//   res.json({ name, email, picture });
+// });
 
 //Links for auto-sending emails: https://www.youtube.com/watch?v=CrdMFZIYoEY
 //
 
 //Will need to change/inspect the routes below this
 app.use('/api', apiRouter, (req, res) => {
-    return res.status(200).send('Connected!')
+    return res.status(200).json(res.locals)
 })
 
 /* Invalid End Point Error Handler */
